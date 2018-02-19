@@ -1,0 +1,16 @@
+<% answer = open("https://wagon-dictionary.herokuapp.com/#{@word}").read %>
+<% word = JSON.parse(answer) %>
+
+<h1>RESULT</h1>
+<% if @word.chars.all? { |letter| @word.chars.count(letter) <= @letters.split(" ").count(letter) }%>
+<% if word['found']%>
+Congrats ! <%= @word %> seems to be an english word !
+your score is: <%= session[:current_user_id] += word['length']%>
+<% else %>
+Sorry but <%= @word %> doesn't seem to be a valid english word...
+<% end %>
+<% else %>
+Sorry the <strong>TEST</strong> can't be built out of <%= @letters.split(" ").join(", ").upcase %>
+<% end %>
+<br/>
+ <%= link_to "Play again", "new" %>

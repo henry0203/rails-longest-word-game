@@ -1,0 +1,22 @@
+
+<div class="container">
+<h1>New game</h1>
+<ul class="list-inline">
+<% @letters.each do |element|  %>
+<li>
+<%= element.upcase %>
+</li>
+<% end %>
+</ul>
+
+<p>Fill your word with below letters</p>
+<form class="form-group form-inline" action="score" method="post">
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<%= hidden_field_tag :letters, @letters %>
+  <div class="form-group">
+  <input type="text" class="form-control" name="word">
+  </div>
+  <input class="btn btn-default" type="submit" value="Send!">
+</form>
+Total score: <%= session[:current_user_id] %>
+</div>
